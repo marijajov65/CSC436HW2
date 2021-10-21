@@ -1,0 +1,44 @@
+{
+  "todoItems": [
+    {
+      "id": 0,
+      "title": "Get Groceries",
+      "description": "Get eggs, milk, and bread",
+      "dateCreated": "9/28/2021",
+      "dateCompleted": ""
+    },
+    {
+      "id": 1,
+      "title": "Go to the Gym",
+      "description": "Do a 1-hour workout",
+      "dateCreated": "9/29/2021",
+      "dateCompleted": "9/30/2021"
+    },
+    {
+      "title": "a",
+      "description": "njn",
+      "dateCreated": "10/19/2021",
+      "dateCompleted": "",
+      "id": 2
+    },
+    {
+      "title": "jn",
+      "description": "j",
+      "dateCreated": "10/19/2021",
+      "dateCompleted": "",
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "marija",
+      "password": "badpassword"
+    },
+    {
+      "username": "Isuse",
+      "password": "jao",
+      "id": 2
+    }
+  ]
+}

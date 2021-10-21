@@ -1,9 +1,15 @@
 import React from 'react'
 import Todo from './Todo'
-export default function TodoList ({todoList = []}) {
+import { StateContext } from './Contexts'
+import { useContext } from 'react'
+
+export default function TodoList () {
+    const {state} = useContext(StateContext)
+    const {todoItems} = state;
+
     return (
         <div>
-            {todoList.map((p, i) => <Todo {...p} key={'todo-' + i} />)}
+            {todoItems.map((p, i) => <Todo {...p} key={'todo-' + i} id={i} />)}
         </div> 
         )
     }

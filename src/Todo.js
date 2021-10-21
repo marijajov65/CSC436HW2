@@ -1,43 +1,50 @@
-import React, {useState} from 'react'
-export default function Todo ({ title, description}) {
-    const [checked, setChecked] = useState(false);
-    const[dateCompleted,setDateCompleted] = useState('');
+import React from 'react'
+import { useContext } from 'react';
+import { StateContext } from './Contexts';
+import { useResource } from 'react-request-hook';
+export default function Todo ({ title, description, dateCreated, dateCompleted, id}) {
+ 
+    const {dispatch} = useContext(StateContext)
 
-    function getDate(){
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-        var yyyy = today.getFullYear();
-        today = mm + '/' + dd + '/' + yyyy;
-        return today;
+    
+    const [ , deleteTodo ] = useResource(() => ({
+        url: `/todoItems/${encodeURI(id)}`,
+        method: 'delete'
+    }))
+
+    function handleDelete () {
+        deleteTodo()
+        dispatch({ type: 'DELETE_TODO', id})
+    }
+
+    const [ , toggleTodo ] = useResource(() => ({
+        url: `/todoItems/${encodeURI(id)}`,
+        method: 'put',
+        data: ''
+    }))
+
+    function handleToggle () {
+        toggleTodo()
+        dispatch({ type: 'TOGGLE_TODO', id, getDate:new Date().toLocaleDateString('en-us')})
     }
     
-    function handleInputChange(event){
-        var checked = event.target.checked;
-        setChecked(checked);
-
-        if(event.target.checked===true){
-            setDateCompleted(getDate);
-        } else{
-            setDateCompleted('');
-        }
-    }
-
     return (
     <div>
         <h3>{title}</h3>
         <div><i>{description}</i></div>
-        <div>Created on : {getDate()}</div>
+        <div >Created on : {dateCreated? dateCreated: new Date().toLocaleDateString('en-us')}</div>
+        <div>{'Date completed:'.concat(dateCompleted)}</div>
         <label>
           Complete:
           <input
             type="checkbox"
-            defaultChecked={checked}
-            onChange={handleInputChange}
+            checked = {dateCompleted?true:false}
+            onChange={e=>handleToggle()}
              />
         </label>
-        <div>Date completed: {dateCompleted}</div>
         <br />
+        <button onClick= {e=>handleDelete()}>Delete</button>
+
     </div>        
     )
 }
