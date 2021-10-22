@@ -9,7 +9,7 @@ export default function TodoList () {
 
     return (
         <div>
-            {todoItems.map((p, i) => <Todo {...p} key={'todo-' + i} id={i} />)}
+            {todoItems.map((p, i) => <Todo {...p} key={'todo-' + i} />)}
         </div> 
         )
     }

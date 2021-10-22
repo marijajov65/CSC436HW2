@@ -5,7 +5,7 @@ import CreateTodo from "./CreateTodo";
 import appReducer from './reducers';
 import { StateContext } from "./Contexts";
 import { useResource } from 'react-request-hook';
-import React, {useState,useEffect} from 'react';
+import React, {useEffect} from 'react';
 
 
 

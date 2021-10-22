@@ -2,19 +2,17 @@ function todoReducer(state, action){
     switch(action.type){
       case 'CREATE_TODO':
         const newTodoItem = {
-            title:action.title,
-            description: action.description,
-            dateCompleted: action.dateCompleted,
-            dateCreated: action.dateCreated
+            title:action.data.title,
+            description: action.data.description,
+            dateCompleted: action.data.dateCompleted,
+            dateCreated: action.data.dateCreated,
+            id: action.data.id
           }
-          console.log(state)
-          console.log([newTodoItem, ...state])
         return [newTodoItem, ...state]
-
       case 'TOGGLE_TODO': 
-        return state.map(todo=> state.indexOf(todo)===action.id?{...todo, checked: !todo.checked,dateCompleted : todo.dateCompleted ? '' : action.getDate} : todo)
+        return state.map(todo=> todo.id===action.id?{...todo, checked: !todo.checked,dateCompleted : todo.dateCompleted ? '' : action.getDate} : todo)
       case 'DELETE_TODO':
-        return state.filter(todo => state.indexOf(todo) !== action.id)
+        return state.filter(todo => todo.id !== action.id)
       case 'FETCH_POSTS':
         return action.todoItems
       default:

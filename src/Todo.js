@@ -4,9 +4,9 @@ import { StateContext } from './Contexts';
 import { useResource } from 'react-request-hook';
 export default function Todo ({ title, description, dateCreated, dateCompleted, id}) {
  
+    const complete = dateCompleted?"":new Date().toLocaleDateString('en-us')
     const {dispatch} = useContext(StateContext)
 
-    
     const [ , deleteTodo ] = useResource(() => ({
         url: `/todoItems/${encodeURI(id)}`,
         method: 'delete'
@@ -20,7 +20,7 @@ export default function Todo ({ title, description, dateCreated, dateCompleted, 
     const [ , toggleTodo ] = useResource(() => ({
         url: `/todoItems/${encodeURI(id)}`,
         method: 'put',
-        data: ''
+        data:{id, title, description, dateCreated, dateCompleted: complete}
     }))
 
     function handleToggle () {
